@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Kick Live Stream</title>
+    <style>
+        /* Basic CSS for layout and responsiveness */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        header {
+            background-color: #20C95B; /* Kick's green color */
+            color: white;
+            width: 100%;
+            text-align: center;
+            padding: 20px 0;
+        }
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .stream-player {
+            width: 100%;
+            aspect-ratio: 16/9; /* Maintains video proportions */
+            border: 2px solid #333;
+            border-radius: 5px;
+        }
+        footer {
+            margin-top: auto;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>My Live Stream</h1>
+    </header>
+
+    <div class="container">
+        <!-- Replace YOUR_USERNAME with your Kick username -->
+        <iframe 
+            src="https://player.kick.com/loopster2" 
+            class="stream-player" 
+            frameborder="0" 
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 My Kick Stream. All rights reserved.</p>
+    </footer>
+</body>
+</html>
