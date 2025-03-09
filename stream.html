@@ -3,63 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Kick Live Stream</title>
+    <title>kingplay</title>
+    <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
     <style>
-        /* Basic CSS for layout and responsiveness */
         body {
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            background-color: white;
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
         }
-        header {
-            background-color: #20C95B; /* Kick's green color */
-            color: white;
+        .header {
             width: 100%;
             text-align: center;
             padding: 20px 0;
+            background-color: white;
+            position: fixed;
+            top: 0;
+            z-index: 1;
         }
-        .container {
-            max-width: 1200px;
-            width: 100%;
-            padding: 20px;
-            box-sizing: border-box;
+        .video-container {
+            margin-top: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
         }
-        .stream-player {
-            width: 100%;
-            aspect-ratio: 16/9; /* Maintains video proportions */
-            border: 2px solid #333;
-            border-radius: 5px;
+        .video-js {
+            width: 640px;
+            height: 360px;
         }
-        footer {
-            margin-top: auto;
-            padding: 20px;
-            text-align: center;
-            color: #666;
+        .fullscreen-btn {
+            padding: 8px 16px;
+            cursor: pointer;
+            background-color: #f0f0f0;
+            border: none;
+            border-radius: 4px;
+        }
+        .fullscreen-btn:hover {
+            background-color: #e0e0e0;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>My Live Stream</h1>
-    </header>
-
-    <div class="container">
-        <!-- Replace YOUR_USERNAME with your Kick username -->
-        <iframe 
-            src="https://player.kick.com/loopster2" 
-            class="stream-player" 
-            frameborder="0" 
-            allowfullscreen>
-        </iframe>
+    <div class="header">
+        <h1>Plane Website</h1>
+    </div>
+    
+    <div class="video-container">
+        <video id="liveVideo" class="video-js" controls>
+            <source src="https://stream-cdn-iad3.vaughnsoft.net/play/live_gg2323232323.flv" type="video/x-flv">
+            Your browser does not support the video tag.
+        </video>
     </div>
 
-    <footer>
-        <p>&copy; 2025 My Kick Stream. All rights reserved.</p>
-    </footer>
+    <!-- Load Video.js v7.20.3 -->
+    <script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
+    <!-- Load flv.js v1.6.2 -->
+    <script src="https://unpkg.com/flv.js@1.6.2/dist/flv.min.js"></script>
+    <!-- Load videojs-flvjs plugin -->
+    <script src="https://unpkg.com/videojs-flvjs@0.2.0/dist/videojs-flvjs.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof flvjs === 'undefined') {
+                console.error('flv.js failed to load.');
+                return;
+            } else {
+                console.log('flv.js loaded successfully.');
+            }
+            if (typeof videojs === 'undefined') {
+                console.error('Video.js failed to load.');
+                return;
+            } else {
+                console.log('Video.js loaded successfully.');
+            }
+
+            var player = videojs('liveVideo', {
+                techOrder: ['flvjs'],
+                flvjs: {
+                    mediaDataSource: {
+                        isLive: true,
+                        cors: true,
+                        withCredentials: false
+                    }
+                },
+                controls: true,
+                autoplay: true,
+                preload: 'auto'
+            });
+
+            player.on('error', function(e) {
+                console.error('Player error:', player.error());
+            });
+
+            player.on('loadedmetadata', function() {
+                console.log('Video metadata loaded. Stream should be playing.');
+            });
+        });
+    </script>
 </body>
 </html>
